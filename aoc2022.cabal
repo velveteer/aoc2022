@@ -1,0 +1,25 @@
+cabal-version:       >=1.10
+name:                aoc2022
+version:             0.1.0.0
+license-file:        LICENSE
+author:              Josh Miller
+maintainer:          notjoshmiller@gmail.com
+build-type:          Simple
+extra-source-files:  README.md
+
+library advent
+  build-depends:
+    base < 5,
+    raw-strings-qq,
+    split,
+    text
+  default-language:
+    GHC2021
+  ghc-options:
+    -Wall
+  hs-source-dirs:
+    src
+  exposed-modules:
+    Day1
+    Day2
+    Day3
