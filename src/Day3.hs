@@ -1,5 +1,4 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE QuasiQuotes       #-}
 -- |
 -- Module      : Day3
 -- Description : Day 3 Solutions
@@ -15,7 +14,6 @@ import qualified Data.Maybe        as Maybe
 import           Data.Text         (Text)
 import qualified Data.Text         as Text
 import qualified Data.Text.IO      as Text
-import           Text.RawString.QQ
 
 day3 :: IO ()
 day3 = do
@@ -24,19 +22,10 @@ day3 = do
   print $ day3a input
   print $ day3b input
 
-day3Example :: Text
-day3Example = [r|vJrwpWtwJgWrhcsFMMfFFhFp
-jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
-PmmdzqPrVvPwwTWBwg
-wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
-ttgJtRGJQctTZtZT
-CrZsJsPPZsGzwwsLwLmpwMDw
-|]
-
 -- | Solve Day 3 Part One
 -- Find the item type that appears in both compartments of each rucksack. What
 -- is the sum of the priorities of those item types?
--- >>> day3a day3Example
+-- >>> day3a <$> Text.readFile "text/day3.example.txt"
 -- 157
 day3a :: Text -> Int
 day3a
@@ -54,7 +43,7 @@ day3a
 -- | Solve Day 3 Part Two
 -- Find the item type that corresponds to the badges of each three-Elf group.
 -- What is the sum of the priorities of those item types?
--- >>> day3b day3Example
+-- >>> day3b <$> Text.readFile "text/day3.example.txt"
 -- 70
 day3b :: Text -> Int
 day3b

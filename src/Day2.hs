@@ -1,5 +1,4 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE QuasiQuotes       #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 -- |
 -- Module      : Day2
@@ -15,7 +14,6 @@ import qualified Data.Maybe        as Maybe
 import           Data.Text         (Text)
 import qualified Data.Text         as Text
 import qualified Data.Text.IO      as Text
-import           Text.RawString.QQ
 
 day2 :: IO ()
 day2 = do
@@ -24,16 +22,10 @@ day2 = do
   print $ day2a input
   print $ day2b input
 
-day2Example :: Text
-day2Example = [r|A Y
-B X
-C Z
-|]
-
 -- | Solve Day 2 Part One
 -- What would your total score be if everything goes exactly according to your
 -- strategy guide?
--- >>> day2a day2Example
+-- >>> day2a <$> Text.readFile "text/day2.example.txt"
 -- 15
 day2a :: Text -> Int
 day2a = compute tableA
@@ -41,7 +33,7 @@ day2a = compute tableA
 -- | Solve Day 2 Part Two
 -- Following the Elf's instructions for the second column, what would your
 -- total score be if everything goes exactly according to your strategy guide?
--- >>> day2b day2Example
+-- >>> day2b <$> Text.readFile "text/day2.example.txt"
 -- 12
 day2b :: Text -> Int
 day2b = compute tableB

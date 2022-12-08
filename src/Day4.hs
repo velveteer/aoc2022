@@ -1,5 +1,4 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE QuasiQuotes       #-}
 {-# LANGUAGE ViewPatterns      #-}
 {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
@@ -16,7 +15,6 @@ import           Data.Monoid (Sum (..))
 import           Data.Text         (Text)
 import qualified Data.Text         as Text
 import qualified Data.Text.IO      as Text
-import           Text.RawString.QQ
 
 day4 :: IO ()
 day4 = do
@@ -25,25 +23,16 @@ day4 = do
   print $ day4a input
   print $ day4b input
 
-day4Example :: Text
-day4Example = [r|2-4,6-8
-2-3,4-5
-5-7,7-9
-2-8,3-7
-6-6,4-6
-2-6,4-8
-|]
-
 -- | Solve Day 4 Part One
 -- In how many assignment pairs does one range fully contain the other?
--- >>> day4a day4Example
+-- >>> day4a <$> Text.readFile "text/day4.example.txt"
 -- 2
 day4a :: Text -> Int
 day4a = solve (\a b c d -> (a >= c && b <= d) || (a <= c && b >= d))
 
 -- | Solve Day 4 Part Two
 -- In how many assignment pairs do the ranges overlap?
--- >>> day4b day4Example
+-- >>> day4b <$> Text.readFile "text/day4.example.txt"
 -- 4
 day4b :: Text -> Int
 day4b = solve (\a b c d -> max a c <= min b d)
@@ -53,8 +42,8 @@ solve check
   = Text.lines
   >>>
     foldMap
-      (\(Text.splitOn "," -> [parseRange -> (a, b), parseRange -> (c, d)]) ->
-      Sum . fromEnum $ check a b c d)
+      (\(Text.splitOn "," -> [parseRange -> (a, b), parseRange -> (c, d)])
+      -> Sum . fromEnum $ check a b c d)
   >>> getSum
 
 parseRange :: Text -> (Int, Int)
